@@ -1,33 +1,28 @@
-import paramiko
-import time
-import os
-from dotenv import load_dotenv
+import time, paramiko
+from config import get_env_config
+from utils import wait_for_string
 
-# Load environment variables from .env file
-load_dotenv()
-hostname = os.getenv('HOSTNAME')
-username = os.getenv('USERNAME')
-password = os.getenv('PASSWORD')
+def get_ssh_session(qad_version):
+    try:
+        ssh_config = get_env_config(qad_version)
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.connect(
+            hostname=ssh_config['hostname'],
+            username=ssh_config['username'],
+            password=ssh_config['password']
+        )
 
-def get_ssh_session():
-    # Connect via ssh with credentials
-    ssh_client = paramiko.SSHClient()
-    ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_client.connect(hostname=hostname, username=username, password=password)
+        session = ssh_client.get_transport().open_session()
+        session.get_pty(term=ssh_config['termemul'])
+        session.invoke_shell()
 
-    # Open a session
-    session = ssh_client.get_transport().open_session()
-    session.get_pty(term='xterm')
-    session.invoke_shell()
-    return session
-
-def send_command(session, command):
-    # Execute command
-    session.send(command)
-    time.sleep(1)
-
-    # Print session state
-    output = session.recv(1024)
-    while session.recv_ready():
-        output += session.recv(1024)
-    return output
+         # Wait for the login process to complete
+        if not wait_for_string(session, "THIS SERVER HOSTS THE FOLLOWING QAD ENVIRONMENTS"):
+            raise TimeoutError("Timed out waiting for the QAD environment to load")
+        
+        return session
+    except KeyError as e:
+        raise ValueError(f"Missing configuration key for {qad_version}: {str(e)}")
+    except Exception as e:
+        raise RuntimeError(f"Failed to establish SSH connection for {qad_version}: {str(e)}")

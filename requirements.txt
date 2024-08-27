@@ -2,3 +2,4 @@ paramiko==3.4.1         # Python implementation of the SSHv2 protocol.
 invoke==2.2.0           # For managing shell-oriented subprocesses and organizing executable Python code into CLI-invokable tasks.
 fabric==3.2.2           # For executing shell commands remotely over SSH.
 python-dotenv==1.0.1    # For managing environment variables from .env files
+pyyaml==6.0.2           # For parsing YAML files
