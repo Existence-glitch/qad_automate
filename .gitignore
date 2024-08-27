@@ -1,2 +1,3 @@
 .env
 auto_qad.egg-info
+qad_automate/__pycache__

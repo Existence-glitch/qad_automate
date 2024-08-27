@@ -1,0 +1,37 @@
+new01:
+  hostname: ${HOSTNAME_DEVL}
+  username: ${USERNAME_DEVL}
+  password: ${PASSWORD_DEVL}
+  user: ${USER_DEVL}
+  pass: ${PASS_DEVL}
+  termemul: ${TERMEMUL_DEVL}
+
+new02:
+  hostname: ${HOSTNAME_TEST}
+  username: ${USERNAME_TEST}
+  password: ${PASSWORD_TEST}
+  user: ${USER_TEST}
+  pass: ${PASS_TEST}
+  termemul: ${TERMEMUL_TEST}
+
+new03:
+  hostname: ${HOSTNAME_PROD}
+  username: ${USERNAME_PROD}
+  password: ${PASSWORD_PROD}
+  user: ${USER_PROD}
+  pass: ${PASS_PROD}
+  termemul: ${TERMEMUL_PROD}
+
+old01:
+  hostname: ${HOSTNAME_OLD_PROD}
+  username: ${USERNAME_OLD_PROD}
+  password: ${PASSWORD_OLD_PROD}
+  termemul: ${TERMEMUL_OLD_PROD}
+  qadmenu: ${QADMENU_OLD_PROD}
+
+old02:
+  hostname: ${HOSTNAME_OLD_PILO}
+  username: ${USERNAME_OLD_PILO}
+  password: ${PASSWORD_OLD_PILO}
+  termemul: ${TERMEMUL_OLD_PILO}
+  qadmenu: ${QADMENU_OLD_PILO}

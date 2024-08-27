@@ -1,4 +1,5 @@
 from utils import send_command, execute_commands
+from commands import *
 
 # Gets menu number and selects the function that automatically enters that menu
 def select_menu(session, menu_number):
@@ -15,9 +16,11 @@ def select_menu(session, menu_number):
 # MENU CÓDIGOS GENERALIZADOS
 def menu_36_2_13(session):
     commands = [
-        'TEST SCRIPT PYTHON 1\r',
-        'TEST SCRIPT PYTHON 1\r',
-        '\r',
+        'TEST SCRIPT PYTHON 1',
+        enter(),
+        'TEST SCRIPT PYTHON 1',
+        enter(),
+        enter()
     ]
 
     execute_commands(session, commands)
