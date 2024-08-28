@@ -1,34 +1,18 @@
-import re
 import time
-from config import get_env_config
-from commands import *
 
-# Function that escapes some undesired ANSI characters in the output
-def strip_ansi(text):
-    ansi_escape = re.compile(
-        r'(?:\x1B[@-_]|[\x0e\x0f]|(?:\x1B\[|\x9B)[0-?]*[ -/]*[@-~])'
-    )
-    return ansi_escape.sub('', text.decode('utf-8', 'ignore'))
+def enter():
+    """
+    Return the enter key character.
+    """
+    return '\r'
 
-def send_command(session, command, delay):
-    # Execute command
-    session.send(command)
-    time.sleep(delay)
+def space():
+    """
+    Return a space bar character.
+    """
+    return ' '
 
-    # Print session state
-    output = session.recv(1024)
-    while session.recv_ready():
-        output += session.recv(1024)
-    return output
-
-# Function that executes commands and shows processed output through the CLI
-def execute_commands(session, commands, delay):
-    for command in commands:
-        print(f"Executing: {command}")
-        output = strip_ansi(send_command(session, command, delay))
-        print(output)
-
-def wait_for_string(channel, expected_string, timeout=30):
+def wait_for_string(channel, expected_string, timeout=60):
     """
     Wait for a specific string to appear in the channel output.
     
@@ -41,30 +25,45 @@ def wait_for_string(channel, expected_string, timeout=30):
     buffer = ""
     while time.time() - start_time < timeout:
         if channel.recv_ready():
-            chunk = channel.recv(1024).decode('utf-8', 'ignore')
+            chunk = channel.recv(1024).decode('utf-8')
             buffer += chunk
             if expected_string in buffer:
                 return True
         time.sleep(0.1)
     return False
 
-def execute_command(session, command, wait_for=None, timeout=50):
+def run_cmd(session, command, wait_for=None, timeout=60):
     """
-    Execute a command and optionally wait for a specific string in the output.
+    Execute a command after waiting for a specific string to appear in the output.
     
     :param session: Paramiko channel object
     :param command: Command to execute
-    :param wait_for: String to wait for in the output (optional)
+    :param wait_for: String to wait for in the output before executing the command (optional)
     :param timeout: Maximum time to wait in seconds
     :return: Command output as a string
     """
-    session.send(command + enter())
+    # Wait for the specified string before executing the command
     if wait_for:
+        print(f"Waiting for string: {wait_for}")
         if not wait_for_string(session, wait_for, timeout):
-            raise TimeoutError(f"Timed out waiting for '{wait_for}' after command '{command}'")
+            raise TimeoutError(f"Timed out waiting for '{wait_for}' before executing command '{command}'")
     
-    # Read the output
-    output = ""
-    while session.recv_ready():
-        output += session.recv(1024).decode('utf-8', 'ignore')
+    # Send the command to the session
+    print(f"Executing command: {command}")
+    session.send(command)
+    time.sleep(1) # Wait for the command to be processed
+
+    # Capture all output until there's no more data
+    output = session.recv(1024)
+    while True:
+        if session.recv_ready():
+            chunk = session.recv(1024)
+            output += chunk
+            print(chunk, end="")  # Print each chunk to the terminal as it's received
+        else:
+            break
+    
+    # Ensure all data is printed
+    print(output)
     return output
+
