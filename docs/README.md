@@ -29,7 +29,6 @@ The project consists of several Python files, each responsible for different asp
    ```
 
 ## Configuration
-```
 
 Create a `.env` file in the project root directory and define the environment variables used in the `config.yaml` file:
 
