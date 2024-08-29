@@ -19,6 +19,12 @@ def space():
     """
     return ' '
 
+def enterF4():
+    """
+    Return the F4 key.
+    """
+    return '\x1bOS'
+
 def wait_for_string(channel, expected_string, timeout=60):
     """
     Wait for a specific string to appear in the channel output.
@@ -101,49 +107,6 @@ def run_cmd(session, command, wait_for=None, timeout=60):
 
     return cleaned_output
 
-def run_cmd_after(session, command, wait_for=None, timeout=60):
-    """
-    Execute a command after waiting for a specific string to appear in the output.
-
-    :param session: Paramiko channel object
-    :param command: Command to execute
-    :param wait_for: String to wait for in the output before executing the command (optional)
-    :param timeout: Maximum time to wait in seconds
-    :return: Command output as a string
-    """
-    # Send the command to the session
-    print(f"Executing command: {command}")
-    session.send(command)
-    time.sleep(1)  # Wait for the command to be processed
-
-    # Capture all output until there's no more data
-    output = b""
-    cleaned_output = ""
-    while True:
-        if session.recv_ready():
-            chunk = session.recv(1024)
-            output += chunk
-            # Clean and print each chunk as it's received
-            cleaned_chunk = clean_ansi_escape_sequences(chunk.decode('utf-8', errors='ignore'))
-            cleaned_output += cleaned_chunk
-            print(cleaned_chunk, end="")
-        else:
-            # Check if there's more data after a short delay
-            time.sleep(0.1)
-            if not session.recv_ready():
-                break
-    
-    # Wait for the specified string before executing the command
-    if wait_for:
-        print(f"Waiting for string: {wait_for}")
-        if not wait_for_string(session, wait_for, timeout):
-            raise TimeoutError(f"Timed out waiting for '{wait_for}' before executing command '{command}'")
-
-    # Remove empty lines from the final cleaned output
-    cleaned_output = '\n'.join(line for line in cleaned_output.splitlines() if line.strip())
-
-    return cleaned_output
-
 def capture_output(session, start_string, end_string, append_string):
     """
     Capture output between two strings and append another string.
@@ -154,7 +117,7 @@ def capture_output(session, start_string, end_string, append_string):
     :param append_string: String to append to the captured output
     :return: Captured output with the appended string
     """
-    output = run_cmd_after(session, space())
+    output = run_cmd(session, space())
     start_index = output.find(start_string) + len(start_string)
     end_index = output.find(end_string)
     captured_output = output[start_index:end_index]

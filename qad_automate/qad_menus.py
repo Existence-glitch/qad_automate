@@ -1,4 +1,5 @@
 from utils import *
+from sheets import *
 
 
 def navigate_to_menu_old(session, menu_number):
@@ -50,11 +51,23 @@ def _36_2_13_test(s):
     run_cmd(s, "TEST Comentario" + enter())
 
 def _61_3_16_getAll(s):
+    googlesheet = "https://docs.google.com/spreadsheets/d/1cjQmvLxlmPas0LlASsmRhV14CQ76baw18aLqDYHzO2s/edit?usp=sharing"
     run_cmd(s, enter_n(20))
-    captured_output = capture_output(s, "archivo:", "-Para_Etiq_Bartender.csv", "cont_int.csv")
+    run_cmd(s, space())
+    captured_output = capture_output(s, "archivo:", "cont_int.csv", "cont_int.csv")
     print("El url capturado es: ", captured_output)
     run_cmd(s, space())
-    
+    run_cmd(s, enterF4())
+    run_cmd(s, enterF4())
+    run_cmd(s, enterF4())
+    run_cmd(s, 'Y' + enter())
+    run_cmd(s, 'Q' + enter(), wait_for="Selection:")
+    run_cmd(s, 'cd ..' + enter())
+    run_cmd(s, 'cd ..' + enter())
+    overwrite_csv(s, captured_output, googlesheet)
+
+
+
 # Dictionary to store menu-specific functions for new QAD version
 menu_functions_new = {
     "36.2.13": {
