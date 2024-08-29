@@ -1,6 +1,7 @@
-from utils import run_cmd, enter
+from utils import *
 
-def navigate_to_menu(session, menu_number):
+
+def navigate_to_menu_old(session, menu_number):
     """
     Navigate to the specified menu number.
     
@@ -10,6 +11,16 @@ def navigate_to_menu(session, menu_number):
     menu_parts = menu_number.split('.')
     for part in menu_parts:
         run_cmd(session, part + enter())
+    print(f"Successfully navigated to menu {menu_number}")
+
+def navigate_to_menu(session, menu_number):
+    """
+    Navigate to the specified menu number.
+    
+    :param session: Paramiko session object
+    :param menu_number: Menu number in the format "X.Y.Z"
+    """
+    run_cmd(session, menu_number + enter(), wait_for="blank to EXIT")
     print(f"Successfully navigated to menu {menu_number}")
 
 def execute_menu_function(session, qad_version, menu_number, function_name):
@@ -37,11 +48,20 @@ def _36_2_13_test(s):
     run_cmd(s, "TEST Nombre de campo" + enter())
     run_cmd(s, "TEST Valor" + enter())
     run_cmd(s, "TEST Comentario" + enter())
+
+def _61_3_16_getAll(s):
+    run_cmd(s, enter_n(20))
+    captured_output = capture_output(s, "archivo:", "-Para_Etiq_Bartender.csv", "cont_int.csv")
+    print("El url capturado es: ", captured_output)
+    run_cmd(s, space())
     
 # Dictionary to store menu-specific functions for new QAD version
 menu_functions_new = {
     "36.2.13": {
         "test": lambda session: _36_2_13_test(session),
+    },
+    "61.3.16": {
+        "Extraer Todos": lambda session: _61_3_16_getAll(session),
     },
     # Add more menu numbers and their functions for new version as needed
 }
