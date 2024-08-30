@@ -107,6 +107,22 @@ def run_cmd(session, command, wait_for=None, timeout=60):
 
     return cleaned_output
 
+def run_cmd_output(session, command):
+    """
+    Execute a command and return the complete output as a string.
+
+    :param session: Paramiko channel object
+    :param command: Command to execute
+    :return: Command output as a string
+    """
+    # Send the command to the session
+    stdin, stdout, stderr = session.exec_command(command)
+
+    # Wait for the command to finish and capture the output
+    output = stdout.read().decode('utf-8')
+
+    return output
+
 def capture_output(session, start_string, end_string, append_string):
     """
     Capture output between two strings and append another string.
