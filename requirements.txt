@@ -3,6 +3,4 @@ invoke==2.2.0           # For managing shell-oriented subprocesses and organizin
 fabric==3.2.2           # For executing shell commands remotely over SSH.
 python-dotenv==1.0.1    # For managing environment variables from .env files
 pyyaml==6.0.2           # For parsing YAML files
-numpy==2.1.0             # For pandas library
-pandas==2.2.2            # For opening .csv files 
 gspread==6.1.2           # For connecting to Google Sheets

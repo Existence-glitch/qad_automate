@@ -8,15 +8,16 @@ def get_all(session):
     '''
     s = session
     googlesheet = "https://docs.google.com/spreadsheets/d/1cjQmvLxlmPas0LlASsmRhV14CQ76baw18aLqDYHzO2s/edit?usp=sharing"
-    tmp_localpath = "/tmp/cont_int.csv"
 
     # Get path to cont_int.csv file
-    run_cmd(s, enter_n(20))
-    run_cmd(s, space(), wait_for="Se creo")
-    csv_path_qad = capture_output(s, "archivo:", "cont_int.csv", "cont_int.csv")
-    print("El url capturado es: ", csv_path_qad)
+    run_cmd(s, enter_n(9))
+    run_cmd(s, "cost_req_vs_real" + enter())
+    run_cmd(s, enter())
+    csv_path = '/qond/apps/surfrut/transf_arch/cost_req_vs_real.csv' 
+    print("El url capturado es: ", csv_path)
 
     # Go back to the CLI
+    run_cmd(s, space())
     run_cmd(s, enterF4())
     run_cmd(s, enterF4())
     run_cmd(s, enterF4())
@@ -28,8 +29,9 @@ def get_all(session):
     run_cmd(s, 'cd ..' + enter())
 
     # Get .csv and overwrite the Google Sheet with the new data
-    transfer_csv(s, csv_path_qad, tmp_localpath)
-    insert_csv_to_googlesheet(tmp_localpath, googlesheet, debug=True)
+    transfer_csv(s, csv_path, "/tmp/cont_int.csv")
+    insert_csv_to_googlesheet("/tmp/cont_int.csv", googlesheet, debug=True)
+    #overwrite_csv_into_sheet(s, csv_path, googlesheet, "/tmp/cont_int.csv")
 
 menu_functions = {
     "Extraer Todos": get_all,

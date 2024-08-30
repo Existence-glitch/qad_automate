@@ -1,3 +1,15 @@
-docker build -t qad-automate .
-docker run -d --name qad-automate-container qad-automate
-docker run -d --name qad-automate-container -v /path/to/config:/app/config qad-automate
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+      - /path/on/lightsail:/tmp
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/google-credentials.json
+
+volumes:
+  data:
