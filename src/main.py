@@ -40,6 +40,7 @@ def main():
     finally:
         if 'session' in locals():
             session.close()
+            print("QAD session successfully closed")
 
 if __name__ == "__main__":
     main()

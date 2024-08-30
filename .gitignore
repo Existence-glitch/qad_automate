@@ -1,3 +1,5 @@
 .env
-auto_qad.egg-info
-qad_automate/__pycache__/
+google-credentials.json
+src/__pycache__/
+src/data/
+docker-compose.yml

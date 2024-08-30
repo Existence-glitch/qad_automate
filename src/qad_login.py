@@ -13,7 +13,7 @@ def login_qad(session, qad_version):
 def login_qad_new(session, config):
     s = session
     run_cmd(s, 'qadmenu' + enter(), wait_for = "~$")
-    run_cmd(s, 'US' + enter(), wait_for = "Selection")
+    run_cmd(s, 'US' + enter())
     run_cmd(s, config['user'] + enter(), wait_for = "Enter data or press F4 to end.")
     run_cmd(s, config['pass'] + enter())
     run_cmd(s, enter())
