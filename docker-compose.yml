@@ -6,7 +6,6 @@ services:
     image: qad-automate:${TAG:-latest}
     volumes:
       - .:/app
-      - ./config/programmed_executions.yaml:/app/config/programmed_executions.yaml
     env_file:
       - .env
     environment:

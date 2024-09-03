@@ -5,4 +5,4 @@ executions:
 
   - name: "Daily Report 61.3.16"
     command: "python /app/src/main.py new03 61.3.16 1"
-    schedule: "0 16 * * 2"  # Every Sunday at 4 PM
+    schedule: "0 17 * * 2"  # Every Sunday at 4 PM
