@@ -28,5 +28,5 @@ jobs:
         context: .
         push: true
         tags: |
-          ghcr.io/${{ github.repository_owner }}/qad-automate:${{ github.ref_name }}
-          ghcr.io/${{ github.repository_owner }}/qad-automate:${{ github.sha }}
+          ghcr.io/existence-glitch/qad-automate:${{ github.ref_name }}
+          ghcr.io/existence-glitch/qad-automate:${{ github.sha }}
