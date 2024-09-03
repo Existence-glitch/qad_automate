@@ -1,5 +1,8 @@
 .env
 google-credentials.json
+scripts/
 src/__pycache__/
+src/menus/__pycache__/
 src/data/
 docker-compose.yml
+.DS_Store
