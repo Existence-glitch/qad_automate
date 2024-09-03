@@ -1,22 +1,20 @@
-FROM python:3.9-slim
+# Use Python 3.11 slim image
+FROM python:3.11-slim
 
+# Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    openssh-client \
-    && rm -rf /var/lib/apt/lists/*
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Copy requirements file and install Python dependencies
-COPY requirements.txt .
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code and configuration
-COPY src/ ./src/
-COPY config/ ./config/
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
-# Set environment variables
-ENV PYTHONPATH=/app
+# Define environment variable
+ENV NAME QADAutomate
 
-# Run the application
-CMD ["python", "src/main.py"]
+# Run the scheduler when the container launches
+CMD ["python", "src/scheduler.py"]

@@ -1,0 +1,8 @@
+executions:
+  - name: "Weekly Report 16.3.23"
+    command: "python /app/src/main.py new03 16.3.23 1"
+    schedule: "0 14 * * 0"  # Every Sunday at 2 PM
+
+  - name: "Daily Report 61.3.16"
+    command: "python /app/src/main.py new03 61.3.16 1"
+    schedule: "0 16 * * 2"  # Every Sunday at 4 PM
