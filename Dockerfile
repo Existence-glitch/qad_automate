@@ -10,9 +10,6 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install additional packages for the scheduler
-RUN pip install --no-cache-dir schedule pyyaml
-
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
@@ -20,4 +17,4 @@ EXPOSE 80
 ENV NAME QADAutomate
 
 # Run the scheduler when the container launches
-CMD ["python", "scheduler.py"]
+CMD ["python", "src/scheduler.py"]

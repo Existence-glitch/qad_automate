@@ -82,19 +82,27 @@ If no function index is provided, the script will list available functions and p
 
 ### Scheduled Execution
 
-The tool now supports scheduled executions using a cron-like system. To set up scheduled tasks:
+The tool now supports both cron-style and interval-based scheduled executions. To set up scheduled tasks:
 
 1. Edit the `programmed_executions.yaml` file in the `config` directory.
-2. Add your desired scheduled tasks in the following format:
+2. Add your desired scheduled tasks in one of the following formats:
 
    ```yaml
    executions:
-     - name: "Task Name"
+     - name: "Cron-style Task"
        command: "python /app/src/main.py <qad_version> <menu_number> <function_index>"
        schedule: "* * * * *"  # Cron schedule format
+
+     - name: "Interval-based Task"
+       command: "python /app/src/main.py <qad_version> <menu_number> <function_index>"
+       schedule: "every 5 minutes"  # Run every 5 minutes
    ```
 
+   For interval-based tasks, you can use "minutes" or "hours" as the time unit.
+
 3. The scheduler will automatically pick up these tasks when the Docker container is started.
+
+Note: The minimum interval for scheduled tasks is 1 minute. For cron-style schedules, you can specify the exact minute of execution.
 
 ## Docker
 

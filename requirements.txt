@@ -5,3 +5,4 @@ python-dotenv==1.0.1    # For managing environment variables from .env files
 pyyaml==6.0.2           # For parsing YAML files
 gspread==6.1.2          # For connecting to Google Sheets
 schedule==1.1.0         # For scheduling executions
+croniter==1.3.8         # For parsing cron expressions

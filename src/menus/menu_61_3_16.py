@@ -12,7 +12,7 @@ def get_all(session, domain_name):
 
     # Get path to cont_int.csv file
     run_cmd(s, enter_n(20))
-    run_cmd(s, space(), wait_for="Se creo")
+    run_cmd(s, space(), wait_for="Se creo", timeout=400)
     csv_path_qad = capture_output(s, "archivo:", "cont_int.csv", "cont_int.csv")
     print("El url capturado es: ", csv_path_qad)
 
