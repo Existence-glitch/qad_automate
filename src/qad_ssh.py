@@ -27,25 +27,10 @@ def get_ssh_session(qad_version):
         if qad_version.startswith('new'):
             if not wait_for_string(session, "THIS SERVER HOSTS THE FOLLOWING QAD ENVIRONMENTS"):
                 raise TimeoutError("Timed out waiting for the QAD environment to load")
-        
-        # Determine the environment description based on qad_version
-        env_description = ""
-        if qad_version == "new01":
-            env_description = "QAD Enterprise Applications 2022 - DEVL Environment"
-        elif qad_version == "new02":
-            env_description = "QAD Enterprise Applications 2022 - TEST Environment"
-        elif qad_version == "new03":
-            env_description = "QAD Enterprise Applications 2022 - PROD Environment"
-        elif qad_version == "old01":
-            env_description = "QAD EA 2012 SE - Instancia Prod"
-        elif qad_version == "old02":
-            env_description = "QAD EA 2012 SE - Instancia Pilo"
-        else:
-            env_description = "Unknown QAD Environment"
 
         # Print connection details
         print(f"Successfully connected to {ssh_config['hostname']} as {ssh_config['username']}")
-        print(f"Environment: {env_description}")
+        print(f"Environment: {ssh_config['description']}")
         
         return session
 

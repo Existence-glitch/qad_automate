@@ -5,6 +5,7 @@ new01:
   user: ${USER_DEVL}
   pass: ${PASS_DEVL}
   termemul: ${TERMEMUL_DEVL}
+  description: ${DESCR_DEVL}
 
 new02:
   hostname: ${HOSTNAME_TEST}
@@ -13,6 +14,7 @@ new02:
   user: ${USER_TEST}
   pass: ${PASS_TEST}
   termemul: ${TERMEMUL_TEST}
+  description: ${DESCR_TEST}
 
 new03:
   hostname: ${HOSTNAME_PROD}
@@ -21,6 +23,7 @@ new03:
   user: ${USER_PROD}
   pass: ${PASS_PROD}
   termemul: ${TERMEMUL_PROD}
+  description: ${DESCR_PROD}
 
 old01:
   hostname: ${HOSTNAME_OLD_PROD}
@@ -28,6 +31,7 @@ old01:
   password: ${PASSWORD_OLD_PROD}
   termemul: ${TERMEMUL_OLD_PROD}
   qadmenu: ${QADMENU_OLD_PROD}
+  description: ${DESCR_OLD_PROD}
 
 old02:
   hostname: ${HOSTNAME_OLD_PILO}
@@ -35,3 +39,4 @@ old02:
   password: ${PASSWORD_OLD_PILO}
   termemul: ${TERMEMUL_OLD_PILO}
   qadmenu: ${QADMENU_OLD_PILO}
+  description: ${DESCR_OLD_PILO}

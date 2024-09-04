@@ -55,11 +55,14 @@ qad_automate/
 Create a `.env` file in the project root directory and define the environment variables used in the `config.yaml` file:
 
 ```
-NEW01_HOSTNAME=hostname1
-NEW01_USERNAME=username1
-NEW01_PASSWORD=password1
-NEW01_USER=user1
-NEW01_PASS=pass1
+new01:
+  hostname: ${HOSTNAME_DEVL}
+  username: ${USERNAME_DEVL}
+  password: ${PASSWORD_DEVL}
+  user: ${USER_DEVL}
+  pass: ${PASS_DEVL}
+  termemul: ${TERMEMUL_DEVL}
+  description: ${DESCR_DEVL}
 
 # Repeat for NEW02, NEW03, OLD01, and OLD02
 ```

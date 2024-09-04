@@ -1,12 +1,14 @@
-version: '3'
-
 services:
   qad-automate:
     build: .
     image: qad-automate:${TAG:-latest}
+    container_name: qad-automate
     volumes:
       - .:/app
+      - ./config/programmed_executions.yaml:/app/config/programmed_executions.yaml
+      - ./logs:/app/logs
     env_file:
       - .env
     environment:
       - TZ=America/Santiago
+    command: python src/scheduler.py

@@ -29,7 +29,7 @@ def get_all(session, domain_name):
 
     # Get .csv and overwrite the Google Sheet with the new data
     transfer_csv(s, csv_path_qad, tmp_localpath)
-    insert_csv_to_googlesheet(tmp_localpath, googlesheet, sheet_name=domain_name, debug=True)
+    insert_csv_to_googlesheet(tmp_localpath, googlesheet, sheet_name=domain_name)
 
 menu_functions = {
     "Extraer Todos": get_all,

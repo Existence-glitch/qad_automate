@@ -1,8 +1,8 @@
 executions:
-  - name: "Weekly Report 16.3.23"
+  - name: "16.3.23 *Rep Costos Req vs Real"
     command: "python /app/src/main.py new03 16.3.23 1"
-    schedule: "0 14 * * 0"  # Every Sunday at 2 PM
+    schedule: "35 9 * * 3"
 
-  - name: "Daily Report 61.3.16"
+  - name: "61.3.16 *Rep Contenedor Interno (Ex9.2.2)"
     command: "python /app/src/main.py new03 61.3.16 1"
-    schedule: "0 17 * * 2"  # Every Sunday at 4 PM
+    schedule: "0 16 * * 0"

@@ -39,7 +39,7 @@ def format_date(date_string):
     except ValueError:
         return date_string
     
-def read_csv_with_encoding(file_path, encodings=['utf-8-sig', 'latin-1', 'iso-8859-1', 'windows-1252']):
+def read_csv_with_encoding(file_path, encodings=['latin-1', 'utf-8-sig', 'iso-8859-1', 'windows-1252']):
     """Try to read CSV file with different encodings."""
     for encoding in encodings:
         try:
@@ -106,7 +106,7 @@ def insert_csv_to_googlesheet(csv_path, sheet_url, sheet_name=None, debug=False)
         worksheet.clear()
         worksheet.update(data)
 
-        print(f"Successfully inserted data from {csv_path} into the Google Sheet.")
+        print(f"Successfully inserted data from {csv_path} into the Google Sheet with url {sheet_url}.")
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")

@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Ensure the logs directory exists (it should already be there)
+# Create logs directory and set permissions
 RUN mkdir -p /app/logs && chmod 777 /app/logs
 
 # Install any needed packages specified in requirements.txt

@@ -64,7 +64,7 @@ def clean_ansi_escape_sequences(text):
     
     return text
 
-def run_cmd(session, command, wait_for=None, timeout=60):
+def run_cmd(session, command, wait_for=None, timeout=60, debug=False):
     """
     Execute a command after waiting for a specific string to appear in the output.
 
@@ -72,6 +72,7 @@ def run_cmd(session, command, wait_for=None, timeout=60):
     :param command: Command to execute
     :param wait_for: String to wait for in the output before executing the command (optional)
     :param timeout: Maximum time to wait in seconds
+    :param debug: If True, print full output; if False, only print command execution message (default False)
     :return: Command output as a string
     """
     # Wait for the specified string before executing the command
@@ -95,7 +96,8 @@ def run_cmd(session, command, wait_for=None, timeout=60):
             # Clean and print each chunk as it's received
             cleaned_chunk = clean_ansi_escape_sequences(chunk.decode('utf-8', errors='ignore'))
             cleaned_output += cleaned_chunk
-            print(cleaned_chunk, end="")
+            if debug:
+                print(cleaned_chunk, end="")
         else:
             # Check if there's more data after a short delay
             time.sleep(0.1)
@@ -106,22 +108,6 @@ def run_cmd(session, command, wait_for=None, timeout=60):
     cleaned_output = '\n'.join(line for line in cleaned_output.splitlines() if line.strip())
 
     return cleaned_output
-
-def run_cmd_output(session, command):
-    """
-    Execute a command and return the complete output as a string.
-
-    :param session: Paramiko channel object
-    :param command: Command to execute
-    :return: Command output as a string
-    """
-    # Send the command to the session
-    stdin, stdout, stderr = session.exec_command(command)
-
-    # Wait for the command to finish and capture the output
-    output = stdout.read().decode('utf-8')
-
-    return output
 
 def capture_output(session, start_string, end_string, append_string):
     """
@@ -138,4 +124,3 @@ def capture_output(session, start_string, end_string, append_string):
     end_index = output.find(end_string)
     captured_output = output[start_index:end_index]
     return captured_output + append_string
-
