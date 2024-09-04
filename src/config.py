@@ -49,3 +49,36 @@ def get_env_config(env):
     if env not in CONFIG:
         raise ValueError(f"Environment {env} not found in configuration")
     return CONFIG[env]
+
+GOOGLESHEET_BASE_URL = "https://docs.google.com/spreadsheets/d/{}/edit"
+
+def load_googlesheet_ids(config_filename='googlesheet_urls.yaml'):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    parent_dir = os.path.dirname(current_dir)
+    config_folder = os.path.join(parent_dir, 'config')
+    config_path = os.path.join(config_folder, config_filename)
+    
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Google Sheet IDs config file not found: {config_path}")
+    
+    with open(config_path, 'r') as file:
+        ids_config = yaml.safe_load(file)
+    
+    return ids_config
+
+GOOGLESHEET_IDS = load_googlesheet_ids()
+
+def get_googlesheet_url(qad_version, menu_number, function_index):
+    """
+    Get the Google Sheet URL for a specific QAD version, menu number, and function index.
+    
+    :param qad_version: The QAD version (e.g., 'new02', 'new03')
+    :param menu_number: The menu number (e.g., '61.3.16')
+    :param function_index: The function index (e.g., 1)
+    :return: The full Google Sheet URL or None if not found
+    """
+    try:
+        spreadsheet_id = GOOGLESHEET_IDS[qad_version][menu_number][function_index]
+        return GOOGLESHEET_BASE_URL.format(spreadsheet_id)
+    except KeyError:
+        return None
