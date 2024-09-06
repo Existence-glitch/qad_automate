@@ -30,6 +30,8 @@ old01:
   username: ${USERNAME_OLD_PROD}
   password: ${PASSWORD_OLD_PROD}
   termemul: ${TERMEMUL_OLD_PROD}
+  user: ${USER_OLD_PROD}
+  pass: ${PASS_OLD_PROD}
   qadmenu: ${QADMENU_OLD_PROD}
   description: ${DESCR_OLD_PROD}
 
@@ -38,5 +40,7 @@ old02:
   username: ${USERNAME_OLD_PILO}
   password: ${PASSWORD_OLD_PILO}
   termemul: ${TERMEMUL_OLD_PILO}
+  user: ${USER_OLD_PILO}
+  pass: ${PASS_OLD_PILO}
   qadmenu: ${QADMENU_OLD_PILO}
   description: ${DESCR_OLD_PILO}

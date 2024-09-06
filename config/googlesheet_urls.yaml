@@ -1,13 +1,25 @@
 # Configuration for Google Sheet URLs
 
+# PROD QAD ANTIGUO
+old01:
+  "9.2.2":
+    0: "1cjQmvLxlmPas0LlASsmRhV14CQ76baw18aLqDYHzO2s"
+
+# PILO QAD ANTIGUO
+old02:
+  "9.2.2":
+    0: "11Iq5vnyIuq7HwfRsIsVlsDglwH06Huh5OuZ-vNE7-AY"
+
+# TEST QAD
 new02:
   "61.3.16":
-    1: "11Iq5vnyIuq7HwfRsIsVlsDglwH06Huh5OuZ-vNE7-AY"
+    0: "11Iq5vnyIuq7HwfRsIsVlsDglwH06Huh5OuZ-vNE7-AY"
   "16.3.23":
-    1: "1OlbWz_VqqQ7-Q739j8OlcFM-i5k72sukUvGLapJIJhU"
+    0: "1OlbWz_VqqQ7-Q739j8OlcFM-i5k72sukUvGLapJIJhU"
 
+# PROD QAD
 new03:
   "61.3.16":
-    1: "1cjQmvLxlmPas0LlASsmRhV14CQ76baw18aLqDYHzO2s"
+    0: "1cjQmvLxlmPas0LlASsmRhV14CQ76baw18aLqDYHzO2s"
   "16.3.23":
-    1: "1HZ3MoJb1c0KBP2mMyT7XCriLA9U-0gnisJLTEVsis9w"
+    0: "1HZ3MoJb1c0KBP2mMyT7XCriLA9U-0gnisJLTEVsis9w"

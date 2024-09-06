@@ -21,8 +21,8 @@ def login_qad_new(session, config, domain_name):
 
 def login_qad_old(session, config, domain_name):
     s = session
-    run_cmd(s, config['qadmenu'])
-    run_cmd(s, config['username'] + enter())
-    run_cmd(s, config['password'] + enter())
-    run_cmd(s, domain_name + enter())
-    run_cmd(s, space())
+    run_cmd(s, config['qadmenu'], debug=True)
+    run_cmd(s, config['user'] + enter(), debug=True)
+    run_cmd(s, config['pass'] + enter(), debug=True)
+    run_cmd(s, domain_name + enter(), debug=True)
+    run_cmd(s, space(), debug=True)

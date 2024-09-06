@@ -21,7 +21,10 @@ def get_all(session, domain_name, qad_version, menu_number, function_index):
     print("El url capturado es: ", csv_path)
 
     # Go back to the CLI
-    run_cmd(s, enterF4(), wait_for="F4 to exit.")
+    if qad_version == 'new03':
+        run_cmd(s, enterF4(), wait_for="F4 to exit.")
+    else:
+        run_cmd(s, enterF4())
     run_cmd(s, enterF4())
     run_cmd(s, enterF4())
     run_cmd(s, enterF4())
