@@ -1,4 +1,6 @@
 executions:
+
+# PROD
   - name: "16.3.23 *Rep Costos Req vs Real"
     command: "python /app/src/main.py new03 16.3.23 1"
     schedule: "30 23 * * 0"
@@ -11,10 +13,11 @@ executions:
     command: "python /app/src/main.py new03 61.3.16 1"
     schedule: "40 23 * * 0"
   
+# TEST 
   - name: "TEST 16.3.23 *Rep Costos Req vs Real"
     command: "python /app/src/main.py new02 16.3.23 1"
-    schedule: "*/15 * * * *"
+    schedule: "*/25 * * * *"
 
   - name: "TEST 61.3.16 *Rep Contenedor Interno (Ex9.2.2)"
     command: "python /app/src/main.py new02 61.3.16 1"
-    schedule: "*/10 * * * *"
+    schedule: "*/15 * * * *"
